@@ -1,28 +1,29 @@
 package com.seongcheol.coin_collection.Dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.seongcheol.coin_collection.Domain.Market;
+import com.seongcheol.coin_collection.Domain.MarketEvent;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class MarketDto {
     private Integer id;
 
+    @JsonProperty("market")
     private String market;
+    @JsonProperty("korean_name")
     private String korean_name;
+    @JsonProperty("english_name")
     private String english_name;
-
-    private Boolean market_event_warning;
-    private Boolean market_event_caution_price_fluctuations;
-    private Boolean market_event_caution_trading_volume_soaring;
-    private Boolean market_event_caution_trading_amount_soaring;
-    private Boolean market_event_caution_price_differences;
-    private Boolean market_event_caution_concentration_of_small_accounts;
+    @JsonProperty("market_event")
+    private MarketEvent market_event;
 
     private LocalDateTime updated_at;
 
@@ -31,12 +32,7 @@ public class MarketDto {
                 .market(marketDto.getMarket())
                 .korean_name(marketDto.getKorean_name())
                 .english_name(marketDto.getEnglish_name())
-                .market_event_warning(marketDto.getMarket_event_warning())
-                .market_event_caution_price_fluctuations(marketDto.getMarket_event_caution_price_fluctuations())
-                .market_event_caution_trading_volume_soaring(marketDto.getMarket_event_caution_trading_volume_soaring())
-                .market_event_caution_trading_amount_soaring(marketDto.getMarket_event_caution_trading_amount_soaring())
-                .market_event_caution_price_differences(marketDto.getMarket_event_caution_price_differences())
-                .market_event_caution_concentration_of_small_accounts(marketDto.getMarket_event_caution_concentration_of_small_accounts())
+                .marketEvent(marketDto.getMarket_event())
                 .build();
     }
 
@@ -46,13 +42,7 @@ public class MarketDto {
                 .market(market.getMarket())
                 .korean_name(market.getKorean_name())
                 .english_name(market.getEnglish_name())
-                .market_event_warning(market.getMarket_event_warning())
-                .market_event_caution_price_fluctuations(market.getMarket_event_caution_price_fluctuations())
-                .market_event_caution_trading_volume_soaring(market.getMarket_event_caution_trading_volume_soaring())
-                .market_event_caution_trading_amount_soaring(market.getMarket_event_caution_trading_amount_soaring())
-                .market_event_caution_price_differences(market.getMarket_event_caution_price_differences())
-                .market_event_caution_concentration_of_small_accounts(market.getMarket_event_caution_concentration_of_small_accounts())
-                .updated_at(market.getUpdated_at())
+                .market_event(market.getMarketEvent())
                 .build();
     }
 }

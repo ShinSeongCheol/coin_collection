@@ -16,15 +16,13 @@ public class MarketService {
 	
 	public List<Market> getMarketList() {
 		List<Market> marketList = marketRepository.findAll();
-		for (Market market : marketList) {
-			System.out.println(market.toString());
-		}
+
 		return marketList;
 	}
 	
 	public Market getMarket() {
 		Market market = marketRepository.findByMarket("market");
-		System.out.println(market);
+
 		return market;
 	}
 	

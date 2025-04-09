@@ -18,11 +18,6 @@ public class MarketController {
 	@GetMapping("/")
 	public List<Market> main() {
 		List<Market> marketList = marketService.getMarketList();
-		for (Market market : marketList) {
-			System.out.println(market.toString());
-			System.out.println(market.getMarket());
-		}
-		marketService.getMarket();
 		return marketList;
 	}
 	

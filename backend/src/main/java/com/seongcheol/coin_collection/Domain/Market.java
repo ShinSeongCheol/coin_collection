@@ -37,7 +37,7 @@ public class Market {
 	private Boolean market_event_caution_price_fluctuations;
 	private Boolean market_event_caution_trading_volume_soaring;
 	private Boolean market_event_caution_trading_amount_soaring;
-	private Boolean market_event_caution_price_diferences;
+	private Boolean market_event_caution_price_differences;
 	private Boolean market_event_caution_concentration_of_small_accounts;
 	
 	private LocalDateTime updated_at;

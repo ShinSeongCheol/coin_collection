@@ -8,5 +8,6 @@ import com.seongcheol.coin_collection.Domain.Market;
 
 public interface MarketRepository extends JpaRepository<Market, Integer>{
 	List<Market> findAll();
-	Market findByMarket(String id);
+	Market findByMarket(String market);
+	boolean existsByMarket(String market);
 }

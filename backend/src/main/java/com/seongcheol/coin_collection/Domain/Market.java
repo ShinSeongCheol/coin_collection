@@ -28,14 +28,14 @@ public class Market {
 	private String korean_name;
 	@Column
 	private String english_name;
-	
-	private Boolean market_event_warning;
-	private Boolean market_event_caution_price_fluctuations;
-	private Boolean market_event_caution_trading_volume_soaring;
-	private Boolean market_event_caution_trading_amount_soaring;
-	private Boolean market_event_caution_price_differences;
-	private Boolean market_event_caution_concentration_of_small_accounts;
-	
+
+	@Embedded
+	private MarketEvent marketEvent;
+
 	private LocalDateTime updated_at;
-	
+
+	@PrePersist
+	public void prePersist() {
+		updated_at = LocalDateTime.now();
+	}
 }

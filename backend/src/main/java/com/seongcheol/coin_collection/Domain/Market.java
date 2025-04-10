@@ -25,17 +25,22 @@ public class Market {
 	@Column(unique = true)
 	private String market;
 	@Column
-	private String korean_name;
+	private String koreanName;
 	@Column
-	private String english_name;
+	private String englishName;
 
 	@Embedded
 	private MarketEvent marketEvent;
 
-	private LocalDateTime updated_at;
+	private LocalDateTime updatedAt;
 
 	@PrePersist
 	public void prePersist() {
-		updated_at = LocalDateTime.now();
+		updatedAt = LocalDateTime.now();
+	}
+	
+	@PreUpdate
+	public void preUpdate() {
+		updatedAt = LocalDateTime.now();
 	}
 }

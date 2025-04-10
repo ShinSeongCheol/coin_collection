@@ -19,20 +19,21 @@ public class MarketDto {
     @JsonProperty("market")
     private String market;
     @JsonProperty("korean_name")
-    private String korean_name;
+    private String koreanName;
     @JsonProperty("english_name")
-    private String english_name;
+    private String englishName;
     @JsonProperty("market_event")
-    private MarketEvent market_event;
+    private MarketEvent marketEvent;
 
     private LocalDateTime updated_at;
 
-    public Market toEntity(MarketDto marketDto) {
+    public Market toEntity() {
         return Market.builder()
-                .market(marketDto.getMarket())
-                .korean_name(marketDto.getKorean_name())
-                .english_name(marketDto.getEnglish_name())
-                .marketEvent(marketDto.getMarket_event())
+        		.id(this.getId())
+                .market(this.getMarket())
+                .koreanName(this.getKoreanName())
+                .englishName(this.getEnglishName())
+                .marketEvent(this.getMarketEvent())
                 .build();
     }
 
@@ -40,9 +41,9 @@ public class MarketDto {
         return MarketDto.builder()
                 .id(market.getId())
                 .market(market.getMarket())
-                .korean_name(market.getKorean_name())
-                .english_name(market.getEnglish_name())
-                .market_event(market.getMarketEvent())
+                .koreanName(market.getKoreanName())
+                .englishName(market.getEnglishName())
+                .marketEvent(market.getMarketEvent())
                 .build();
     }
 }

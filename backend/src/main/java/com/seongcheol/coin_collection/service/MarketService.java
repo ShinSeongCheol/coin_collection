@@ -53,6 +53,7 @@ public class MarketService {
 								.koreanName(market.getKoreanName())
 								.englishName(market.getEnglishName())
 								.marketEvent(market.getMarketEvent())
+								.createdAt(market.getCreatedAt())
 								.build();
 						
 						return updatedMarketDto.toEntity();

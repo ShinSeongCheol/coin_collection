@@ -30,7 +30,7 @@ public class MarketService {
 		return optionalMarket.get();
 	}
 
-	public void getUpbitMarket() {
+	public void registerUpbitMarket() {
 		List<MarketDto> marketDtoList =  WebClient.builder()
 				.baseUrl("https://api.upbit.com/v1/market/all?is_details=true")
 				.build()

@@ -1,5 +1,7 @@
 package com.seongcheol.coin_collection.domain;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,16 +30,16 @@ public class DayCandle {
 	@Column
 	private String candleDateTimeKst;
 	
-	private Double openingPrice;
-	private Double highPrice;
-	private Double lowPrice;
-	private Double tradePrice;
+	private BigDecimal openingPrice;
+	private BigDecimal highPrice;
+	private BigDecimal lowPrice;
+	private BigDecimal tradePrice;
 	private Long timestamp;
-	private Double candleAccTradePrice;
-	private Double candleAccTradeVolume;
-	private Double prevClosingPrice;
-	private Double changePrice;
-	private Double changeRate;
-	private Double convertedTradePrice;
+	private BigDecimal candleAccTradePrice;
+	private BigDecimal candleAccTradeVolume;
+	private BigDecimal prevClosingPrice;
+	private BigDecimal changePrice;
+	private BigDecimal changeRate;
+	private BigDecimal convertedTradePrice;
 	
 }

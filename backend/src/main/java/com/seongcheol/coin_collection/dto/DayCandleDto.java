@@ -1,16 +1,21 @@
 package com.seongcheol.coin_collection.dto;
 
+import java.math.BigDecimal;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.seongcheol.coin_collection.domain.DayCandle;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class DayCandleDto {
@@ -26,27 +31,64 @@ public class DayCandleDto {
 	private String candleDateTimeKst;
 	
 	@JsonProperty("opening_price")
-	private Double openingPrice;
+	private BigDecimal openingPrice;
 	@JsonProperty("high_price")
-	private Double highPrice;
+	private BigDecimal highPrice;
 	@JsonProperty("low_price")
-	private Double lowPrice;
+	private BigDecimal lowPrice;
 	@JsonProperty("trade_price")
-	private Double tradePrice;
+	private BigDecimal tradePrice;
 	@JsonProperty("timestamp")
 	private Long timestamp;
 	@JsonProperty("candle_acc_trade_price")
-	private Double candleAccTradePrice;
+	private BigDecimal candleAccTradePrice;
 	@JsonProperty("candle_acc_trade_volume")
-	private Double candleAccTradeVolume;
+	private BigDecimal candleAccTradeVolume;
 	@JsonProperty("prev_closing_price")
-	private Double prevClosingPrice;
+	private BigDecimal prevClosingPrice;
 	@JsonProperty("change_price")
-	private Double changePrice;
+	private BigDecimal changePrice;
 	@JsonProperty("change_rate")
-	private Double changeRate;
+	private BigDecimal changeRate;
 	@JsonProperty("converted_trade_price")
-	private Double convertedTradePrice;
+	private BigDecimal convertedTradePrice;
 	
+	public DayCandle toEntity() {
+		return DayCandle.builder()
+				.market(this.market)
+				.candleDateTimeUtc(this.candleDateTimeUtc)
+				.candleDateTimeKst(this.candleDateTimeKst)
+				.openingPrice(this.openingPrice)
+				.highPrice(this.highPrice)
+				.lowPrice(this.lowPrice)
+				.tradePrice(this.tradePrice)
+				.timestamp(this.timestamp)
+				.candleAccTradePrice(this.candleAccTradePrice)
+				.candleAccTradeVolume(this.candleAccTradeVolume)
+				.prevClosingPrice(this.prevClosingPrice)
+				.changePrice(this.changePrice)
+				.changeRate(this.changeRate)
+				.convertedTradePrice(this.convertedTradePrice)
+				.build();
+	}
 	
+	public DayCandleDto toDto(DayCandle dayCandle) {
+		return DayCandleDto.builder()
+				.id(dayCandle.getId())
+				.market(dayCandle.getMarket())
+				.candleDateTimeUtc(dayCandle.getCandleDateTimeUtc())
+				.candleDateTimeKst(dayCandle.getCandleDateTimeKst())
+				.openingPrice(dayCandle.getOpeningPrice())
+				.highPrice(dayCandle.getHighPrice())
+				.lowPrice(dayCandle.getLowPrice())
+				.tradePrice(dayCandle.getTradePrice())
+				.timestamp(dayCandle.getTimestamp())
+				.candleAccTradePrice(dayCandle.getCandleAccTradePrice())
+				.candleAccTradeVolume(dayCandle.getCandleAccTradeVolume())
+				.prevClosingPrice(dayCandle.getPrevClosingPrice())
+				.changePrice(dayCandle.getChangePrice())
+				.changeRate(dayCandle.getChangeRate())
+				.convertedTradePrice(dayCandle.getConvertedTradePrice())
+				.build();
+	}
 }

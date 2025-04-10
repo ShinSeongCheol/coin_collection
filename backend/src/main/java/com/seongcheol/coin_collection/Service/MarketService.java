@@ -1,14 +1,16 @@
 package com.seongcheol.coin_collection.Service;
 
-import com.seongcheol.coin_collection.Domain.Market;
-import com.seongcheol.coin_collection.Dto.MarketDto;
-import com.seongcheol.coin_collection.Repository.MarketRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.List;
+import com.seongcheol.coin_collection.Domain.Market;
+import com.seongcheol.coin_collection.Dto.MarketDto;
+import com.seongcheol.coin_collection.Repository.MarketRepository;
 
 @Service
 public class MarketService {
@@ -23,24 +25,44 @@ public class MarketService {
 	}
 	
 	public Market getMarket() {
-		Market market = marketRepository.findByMarket("market");
+		Optional<Market> optionalMarket = marketRepository.findByMarket("market");
 
-		return market;
+		return optionalMarket.get();
 	}
 
-	public void getMarketAll() {
-		WebClient.builder()
+	public void getUpbitMarket() {
+		List<MarketDto> marketDtoList =  WebClient.builder()
 				.baseUrl("https://api.upbit.com/v1/market/all?is_details=true")
 				.build()
 				.get()
 				.accept(MediaType.APPLICATION_JSON)
 				.retrieve()
 				.bodyToFlux(MarketDto.class)
-				.subscribe(marketDto -> {
-					if (!marketRepository.existsByMarket(marketDto.getMarket())) {
-						marketRepository.save(marketDto.toEntity(marketDto));
-					};
-				});
+				.collectList()
+				.block();
+		
+		
+		List<Market> marketList =  marketDtoList.stream()
+				.map(marketDto -> {
+					Optional<Market> optionalMarket = marketRepository.findByMarket(marketDto.getMarket());
+					if(optionalMarket.isPresent()) {
+						Market market = optionalMarket.get();
+						MarketDto updatedMarketDto = MarketDto.builder()
+								.id(market.getId())
+								.market(market.getMarket())
+								.koreanName(market.getKoreanName())
+								.englishName(market.getEnglishName())
+								.marketEvent(market.getMarketEvent())
+								.build();
+						
+						return updatedMarketDto.toEntity();
+					}else {
+						return marketDto.toEntity();
+					}
+				})
+				.toList();
+		
+		marketRepository.saveAll(marketList);
 	}
 	
 }

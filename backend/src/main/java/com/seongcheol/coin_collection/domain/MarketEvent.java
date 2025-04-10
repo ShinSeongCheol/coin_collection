@@ -1,4 +1,4 @@
-package com.seongcheol.coin_collection.Domain;
+package com.seongcheol.coin_collection.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Embeddable;

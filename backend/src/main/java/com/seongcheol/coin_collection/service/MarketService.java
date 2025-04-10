@@ -1,4 +1,4 @@
-package com.seongcheol.coin_collection.Service;
+package com.seongcheol.coin_collection.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,9 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.seongcheol.coin_collection.Domain.Market;
-import com.seongcheol.coin_collection.Dto.MarketDto;
-import com.seongcheol.coin_collection.Repository.MarketRepository;
+import com.seongcheol.coin_collection.domain.Market;
+import com.seongcheol.coin_collection.dto.MarketDto;
+import com.seongcheol.coin_collection.repository.MarketRepository;
 
 @Service
 public class MarketService {

@@ -1,8 +1,9 @@
-package com.seongcheol.coin_collection.Dto;
+package com.seongcheol.coin_collection.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.seongcheol.coin_collection.Domain.Market;
-import com.seongcheol.coin_collection.Domain.MarketEvent;
+import com.seongcheol.coin_collection.domain.Market;
+import com.seongcheol.coin_collection.domain.MarketEvent;
+
 import lombok.*;
 
 import java.time.LocalDateTime;

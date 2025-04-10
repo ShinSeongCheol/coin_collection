@@ -1,4 +1,4 @@
-package com.seongcheol.coin_collection.Domain;
+package com.seongcheol.coin_collection.domain;
 
 import java.time.LocalDateTime;
 

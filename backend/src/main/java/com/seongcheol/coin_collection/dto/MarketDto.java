@@ -26,7 +26,8 @@ public class MarketDto {
     @JsonProperty("market_event")
     private MarketEvent marketEvent;
 
-    private LocalDateTime updated_at;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Market toEntity() {
         return Market.builder()
@@ -35,6 +36,7 @@ public class MarketDto {
                 .koreanName(this.getKoreanName())
                 .englishName(this.getEnglishName())
                 .marketEvent(this.getMarketEvent())
+                .createdAt(this.getCreatedAt())
                 .build();
     }
 

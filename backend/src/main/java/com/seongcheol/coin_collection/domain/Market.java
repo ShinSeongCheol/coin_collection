@@ -32,10 +32,12 @@ public class Market {
 	@Embedded
 	private MarketEvent marketEvent;
 
+	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 
 	@PrePersist
 	public void prePersist() {
+		createdAt = LocalDateTime.now();
 		updatedAt = LocalDateTime.now();
 	}
 	

@@ -11,5 +11,9 @@ spring:
     url: jdbc:h2:mem:coin_collection
     username: sa
     password: sa
+
   jpa:
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

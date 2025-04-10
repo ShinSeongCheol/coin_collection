@@ -28,10 +28,10 @@ public class DayCandle {
 	@Column
 	private String candleDateTimeKst;
 	
-	private Double opening_price;
-	private Double high_price;
-	private Double low_price;
-	private Double trade_price;
+	private Double openingPrice;
+	private Double highPrice;
+	private Double lowPrice;
+	private Double tradePrice;
 	private Long timestamp;
 	private Double candleAccTradePrice;
 	private Double candleAccTradeVolume;

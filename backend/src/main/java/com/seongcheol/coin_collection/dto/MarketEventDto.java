@@ -34,7 +34,7 @@ public class MarketEventDto {
     public MarketEventDto toDto(MarketEvent marketEvent) {
     	return MarketEventDto.builder()
     			.warning(marketEvent.getWarning())
-    			.cautionDto(cautionDto.toDto(marketEvent.getCaution()))
+    			.cautionDto(CautionDto.builder().build().toDto(marketEvent.getCaution()))
     			.build();
     }
 }

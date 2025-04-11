@@ -34,7 +34,7 @@ public class MarketService {
 		return optionalMarket.get();
 	}
 
-	public void updateUpbitMarket() {
+	public List<MarketDto> updateUpbitMarket() {
 		URI uri = UriComponentsBuilder.fromUriString("https://api.upbit.com/v1")
 				.path("/market/all")
 				.queryParam("is_details", "true")
@@ -84,7 +84,9 @@ public class MarketService {
 				})
 				.toList();
 		
-		marketRepository.saveAll(marketList);
+		return marketRepository.saveAll(marketList).stream().map(market -> {
+				return MarketDto.builder().build().toDto(market);
+			}).toList();
 	}
 	
 }

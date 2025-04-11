@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.seongcheol.coin_collection.domain.Market;
+import com.seongcheol.coin_collection.dto.MarketDto;
 import com.seongcheol.coin_collection.service.CandleService;
 import com.seongcheol.coin_collection.service.MarketService;
 
@@ -25,10 +26,9 @@ public class MarketController {
 		return marketList;
 	}
 	
-	@GetMapping("/update")
-	public void update() {
-		marketService.updateUpbitMarket();
-		candleService.updateDayCandle();
+	@GetMapping("/market/update")
+	public List<MarketDto> update() {
+		return marketService.updateUpbitMarket();
 	}
 	
 }

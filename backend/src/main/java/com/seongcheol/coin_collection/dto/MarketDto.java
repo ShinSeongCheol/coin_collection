@@ -50,7 +50,9 @@ public class MarketDto {
                 .market(market.getMarket())
                 .koreanName(market.getKoreanName())
                 .englishName(market.getEnglishName())
-                .marketEventDto(marketEventDto.toDto(market.getMarketEvent()))
+                .marketEventDto(MarketEventDto.builder().build().toDto(market.getMarketEvent()))
+                .createdAt(market.getCreatedAt())
+                .updatedAt(market.getUpdatedAt())
                 .build();
     }
 }

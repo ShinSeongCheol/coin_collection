@@ -23,7 +23,7 @@ public class MarketController {
 	@Autowired
 	CandleService candleService;
 
-	@GetMapping("/")
+	@GetMapping
 	public List<MarketDto> main() {
 		return marketService.getMarketList();
 	}

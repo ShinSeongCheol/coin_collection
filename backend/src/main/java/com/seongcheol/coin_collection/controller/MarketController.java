@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.seongcheol.coin_collection.domain.Market;
@@ -13,6 +14,7 @@ import com.seongcheol.coin_collection.service.CandleService;
 import com.seongcheol.coin_collection.service.MarketService;
 
 @RestController
+@RequestMapping("/market")
 public class MarketController {
 
 	@Autowired
@@ -22,12 +24,11 @@ public class MarketController {
 	CandleService candleService;
 
 	@GetMapping("/")
-	public List<Market> main() {
-		List<Market> marketList = marketService.getMarketList();
-		return marketList;
+	public List<MarketDto> main() {
+		return marketService.getMarketList();
 	}
 	
-	@PostMapping("/market/update")
+	@PostMapping("/update")
 	public List<MarketDto> update() {
 		return marketService.updateUpbitMarket();
 	}

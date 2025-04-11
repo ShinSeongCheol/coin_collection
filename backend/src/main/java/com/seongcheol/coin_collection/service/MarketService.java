@@ -22,10 +22,10 @@ public class MarketService {
 	@Autowired
 	MarketRepository marketRepository;
 	
-	public List<Market> getMarketList() {
-		List<Market> marketList = marketRepository.findAll();
-
-		return marketList;
+	public List<MarketDto> getMarketList() {
+		return marketRepository.findAll().stream().map(market -> {
+			return MarketDto.builder().build().toDto(market);
+		}).toList();
 	}
 	
 	public Market getMarket() {

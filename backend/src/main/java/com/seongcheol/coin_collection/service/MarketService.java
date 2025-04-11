@@ -75,6 +75,7 @@ public class MarketService {
 												)
 										.build()
 										)
+								.createdAt(market.getCreatedAt())
 								.build()
 								.toEntity();
 					}else {

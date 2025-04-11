@@ -24,7 +24,7 @@ public class MarketController {
 	CandleService candleService;
 
 	@GetMapping
-	public List<MarketDto> main() {
+	public List<MarketDto> getMarketDtoList() {
 		return marketService.getMarketList();
 	}
 	

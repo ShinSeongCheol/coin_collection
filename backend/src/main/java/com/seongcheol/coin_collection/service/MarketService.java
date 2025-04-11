@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.seongcheol.coin_collection.domain.Market;
+import com.seongcheol.coin_collection.dto.CautionDto;
 import com.seongcheol.coin_collection.dto.MarketDto;
+import com.seongcheol.coin_collection.dto.MarketEventDto;
 import com.seongcheol.coin_collection.repository.MarketRepository;
 
 @Service
@@ -47,15 +49,25 @@ public class MarketService {
 					Optional<Market> optionalMarket = marketRepository.findByMarket(marketDto.getMarket());
 					if(optionalMarket.isPresent()) {
 						Market market = optionalMarket.get();
-						MarketDto updatedMarketDto = MarketDto.builder()
+						return MarketDto.builder()
 								.id(market.getId())
 								.market(market.getMarket())
 								.koreanName(market.getKoreanName())
 								.englishName(market.getEnglishName())
-								.marketEvent(market.getMarketEvent())
-								.build();
-						
-						return updatedMarketDto.toEntity();
+								.marketEventDto(MarketEventDto.builder()
+										.warning(market.getMarketEvent().getWarning())
+										.cautionDto(CautionDto.builder()
+												.priceFluctuations(market.getMarketEvent().getCaution().getPriceFluctuations())
+												.tradingVolumeSoaring(market.getMarketEvent().getCaution().getTradingVolumeSoaring())
+												.tradingAmountSoaring(market.getMarketEvent().getCaution().getTradingAmountSoaring())
+												.globalPriceDifferences(market.getMarketEvent().getCaution().getGlobalPriceDifferences())
+												.concentrationOfSmallAccounts(market.getMarketEvent().getCaution().getConcentrationOfSmallAccounts())
+												.build()
+												)
+										.build()
+										)
+								.build()
+								.toEntity();
 					}else {
 						return marketDto.toEntity();
 					}

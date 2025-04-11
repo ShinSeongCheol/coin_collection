@@ -1,12 +1,16 @@
 package com.seongcheol.coin_collection.dto;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.seongcheol.coin_collection.domain.Market;
-import com.seongcheol.coin_collection.domain.MarketEvent;
 
-import lombok.*;
-
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -24,7 +28,7 @@ public class MarketDto {
     @JsonProperty("english_name")
     private String englishName;
     @JsonProperty("market_event")
-    private MarketEvent marketEvent;
+    private MarketEventDto marketEventDto;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -35,7 +39,7 @@ public class MarketDto {
                 .market(this.getMarket())
                 .koreanName(this.getKoreanName())
                 .englishName(this.getEnglishName())
-                .marketEvent(this.getMarketEvent())
+                .marketEvent(this.getMarketEventDto().toEntity())
                 .createdAt(this.getCreatedAt())
                 .build();
     }
@@ -46,7 +50,7 @@ public class MarketDto {
                 .market(market.getMarket())
                 .koreanName(market.getKoreanName())
                 .englishName(market.getEnglishName())
-                .marketEvent(market.getMarketEvent())
+                .marketEventDto(marketEventDto.toDto(market.getMarketEvent()))
                 .build();
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.seongcheol.coin_collection.domain.Market;
+import com.seongcheol.coin_collection.service.CandleService;
 import com.seongcheol.coin_collection.service.MarketService;
 
 @RestController
@@ -14,6 +15,9 @@ public class MarketController {
 
 	@Autowired
 	MarketService marketService;
+	
+	@Autowired
+	CandleService candleService;
 
 	@GetMapping("/")
 	public List<Market> main() {
@@ -24,6 +28,7 @@ public class MarketController {
 	@GetMapping("/update")
 	public void update() {
 		marketService.registerUpbitMarket();
+		candleService.getDayCandle();
 	}
 	
 }

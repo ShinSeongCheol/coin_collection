@@ -32,7 +32,6 @@ public class Market {
 	
 	@Column(unique = true)
 	@Comment("업비트에서 제공중인 시장 정보")
-	
 	private String market;
 	@Column
 	@Comment("거래 대상 디지털 자산 한글명")

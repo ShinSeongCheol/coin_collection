@@ -14,7 +14,7 @@ public class CandleScheduler {
 	@Autowired
 	private CandleService candleService;
 	
-	@Scheduled(cron = "10 0 0 * * *")
+	@Scheduled(cron = "10 0 9 * * *")
 	public void run() {
 		candleService.updateDayCandle();
 	}

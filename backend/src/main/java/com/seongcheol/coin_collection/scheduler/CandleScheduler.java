@@ -16,7 +16,7 @@ public class CandleScheduler {
 	
 	@Scheduled(cron = "10 0 0 * * *")
 	public void run() {
-		candleService.getDayCandle();
+		candleService.updateDayCandle();
 	}
 	
 }

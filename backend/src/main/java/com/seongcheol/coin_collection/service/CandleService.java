@@ -29,7 +29,7 @@ public class CandleService {
 	@Autowired
 	private CandleRepository candleRepository;
 	
-	public void getDayCandle() {
+	public void updateDayCandle() {
 		
 		List<Market> marketList =  marketRepository.findAll();
 		

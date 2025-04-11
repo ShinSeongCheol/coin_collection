@@ -27,8 +27,8 @@ public class MarketController {
 	
 	@GetMapping("/update")
 	public void update() {
-		marketService.registerUpbitMarket();
-		candleService.getDayCandle();
+		marketService.updateUpbitMarket();
+		candleService.updateDayCandle();
 	}
 	
 }

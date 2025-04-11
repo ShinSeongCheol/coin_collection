@@ -1,5 +1,6 @@
 package com.seongcheol.coin_collection.service;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.seongcheol.coin_collection.domain.Market;
 import com.seongcheol.coin_collection.dto.CautionDto;
@@ -32,9 +34,16 @@ public class MarketService {
 		return optionalMarket.get();
 	}
 
-	public void registerUpbitMarket() {
+	public void updateUpbitMarket() {
+		URI uri = UriComponentsBuilder.fromUriString("https://api.upbit.com/v1")
+				.path("/market/all")
+				.queryParam("is_details", "true")
+				.build()
+				.encode()
+				.toUri();
+		
 		List<MarketDto> marketDtoList =  WebClient.builder()
-				.baseUrl("https://api.upbit.com/v1/market/all?is_details=true")
+				.baseUrl(uri.toString())
 				.build()
 				.get()
 				.accept(MediaType.APPLICATION_JSON)

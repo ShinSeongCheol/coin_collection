@@ -28,7 +28,7 @@ public class MarketController {
 		return marketService.getMarketList();
 	}
 	
-	@PostMapping("/update")
+	@PostMapping
 	public List<MarketDto> update() {
 		return marketService.updateUpbitMarket();
 	}

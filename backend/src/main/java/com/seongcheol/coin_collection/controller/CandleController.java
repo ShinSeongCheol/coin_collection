@@ -23,7 +23,7 @@ public class CandleController {
 		return candleService.getDayCandleDtoList();
 	}
 	
-	@PostMapping("/day/update")
+	@PostMapping("/day")
 	public List<DayCandleDto> dayCandleUpdate() {
 		return candleService.updateDayCandle();
 	}

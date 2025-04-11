@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,9 +27,10 @@ public class DayCandle {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column
+	@ManyToOne
+	@JoinColumn(name = "market_id")
 	@Comment("종목 코드")
-	private String market;
+	private Market market;
 	@Column
 	@Comment("캔들 기준 시각(UTC 기준)")
 	private String candleDateTimeUtc;

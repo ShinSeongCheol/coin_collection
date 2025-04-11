@@ -33,36 +33,38 @@ public class CandleService {
 		
 		List<Market> marketList =  marketRepository.findAll();
 		
-		List<DayCandle> dayCandleList = marketList.stream().map(market -> {
+		List<DayCandle> dayCandleList = marketList.stream()
+				.map(market -> {
+					
+					DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+					LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+					localDateTime = LocalDateTime.of(localDateTime.getYear(), localDateTime.getMonth(), localDateTime.getDayOfMonth(), 0, 0, 0);
 			
-			DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-			LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
-			localDateTime = LocalDateTime.of(localDateTime.getYear(), localDateTime.getMonth(), localDateTime.getDayOfMonth(), 0, 0, 0);
+					URI uri = UriComponentsBuilder
+						.fromUriString("https://api.upbit.com/v1")
+						.path("/candles/days")
+						.queryParam("market", market.getMarket())
+						.queryParam("to", localDateTime.format(dateTimeFormatter))
+						.queryParam("count", "1")
+						.queryParam("converting_price_unit", "KRW")
+						.build()
+						.encode()
+						.toUri();
+					
 			
-			URI uri = UriComponentsBuilder
-					.fromUriString("https://api.upbit.com/v1")
-					.path("/candles/days")
-					.queryParam("market", market.getMarket())
-					.queryParam("to", localDateTime.format(dateTimeFormatter))
-					.queryParam("count", "1")
-					.queryParam("converting_price_unit", "KRW")
-					.build()
-					.encode()
-					.toUri();
+					DayCandleDto dayCandleDto =  WebClient.builder()
+						.baseUrl(uri.toString())
+						.build()
+						.get()
+						.accept(MediaType.APPLICATION_JSON)
+						.retrieve()
+						.bodyToFlux(DayCandleDto.class)
+						.delayElements(Duration.ofMillis(200))
+						.collectList()
+						.block()
+						.get(0);
 			
-			DayCandleDto dayCandleDto =  WebClient.builder()
-					.baseUrl(uri.toString())
-					.build()
-					.get()
-					.accept(MediaType.APPLICATION_JSON)
-					.retrieve()
-					.bodyToFlux(DayCandleDto.class)
-					.delayElements(Duration.ofMillis(200))
-					.collectList()
-					.block()
-					.get(0);
-			
-			return dayCandleDto.toEntity();
+					return dayCandleDto.toEntity(market);
 		}).toList();
 		
 		candleRepository.saveAll(dayCandleList);

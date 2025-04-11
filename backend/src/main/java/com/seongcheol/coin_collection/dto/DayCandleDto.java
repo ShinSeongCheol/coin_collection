@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.seongcheol.coin_collection.domain.DayCandle;
+import com.seongcheol.coin_collection.domain.Market;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -53,9 +54,9 @@ public class DayCandleDto {
 	@JsonProperty("converted_trade_price")
 	private BigDecimal convertedTradePrice;
 	
-	public DayCandle toEntity() {
+	public DayCandle toEntity(Market market) {
 		return DayCandle.builder()
-				.market(this.market)
+				.market(market)
 				.candleDateTimeUtc(this.candleDateTimeUtc)
 				.candleDateTimeKst(this.candleDateTimeKst)
 				.openingPrice(this.openingPrice)
@@ -75,7 +76,7 @@ public class DayCandleDto {
 	public DayCandleDto toDto(DayCandle dayCandle) {
 		return DayCandleDto.builder()
 				.id(dayCandle.getId())
-				.market(dayCandle.getMarket())
+				.market(dayCandle.getMarket().getMarket())
 				.candleDateTimeUtc(dayCandle.getCandleDateTimeUtc())
 				.candleDateTimeKst(dayCandle.getCandleDateTimeKst())
 				.openingPrice(dayCandle.getOpeningPrice())

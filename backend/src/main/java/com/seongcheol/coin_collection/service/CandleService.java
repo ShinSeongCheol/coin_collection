@@ -29,6 +29,12 @@ public class CandleService {
 	@Autowired
 	private CandleRepository candleRepository;
 	
+	public List<DayCandleDto> getDayCandleDtoList() {
+		return candleRepository.findAll().stream().map(dayCandle -> {
+					return DayCandleDto.builder().build().toDto(dayCandle);
+				}).toList();
+	}
+	
 	public List<DayCandleDto> updateDayCandle() {
 		
 		List<Market> marketList =  marketRepository.findAll();

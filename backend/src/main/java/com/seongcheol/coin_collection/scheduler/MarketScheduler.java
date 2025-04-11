@@ -13,7 +13,7 @@ public class MarketScheduler {
 	private MarketService marketService;
 	
 	@Scheduled(cron = "0 0 9 * * *")
-	public void registerUpbitMarket() {
+	public void updateUpbitMarket() {
 		marketService.updateUpbitMarket();
 	}
 	

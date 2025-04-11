@@ -1,7 +1,5 @@
 package com.seongcheol.coin_collection.scheduler;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -15,7 +13,7 @@ public class CandleScheduler {
 	private CandleService candleService;
 	
 	@Scheduled(cron = "10 0 9 * * *")
-	public void run() {
+	public void updateDayCandle() {
 		candleService.updateDayCandle();
 	}
 	

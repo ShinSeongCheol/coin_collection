@@ -3,10 +3,16 @@ package com.seongcheol.coin_collection.domain;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.Comment;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,6 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Builder
 @ToString
@@ -42,18 +49,9 @@ public class Market {
 
 	@Embedded
 	private MarketEvent marketEvent;
-
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
-
-	@PrePersist
-	public void prePersist() {
-		createdAt = LocalDateTime.now();
-		updatedAt = LocalDateTime.now();
-	}
 	
-	@PreUpdate
-	public void preUpdate() {
-		updatedAt = LocalDateTime.now();
-	}
+	@CreatedDate
+	private LocalDateTime createdAt;
+	@LastModifiedDate
+	private LocalDateTime updatedAt;
 }

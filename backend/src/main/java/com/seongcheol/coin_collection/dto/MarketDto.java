@@ -40,7 +40,7 @@ public class MarketDto {
                 .koreanName(this.getKoreanName())
                 .englishName(this.getEnglishName())
                 .marketEvent(this.getMarketEventDto().toEntity())
-                .createdAt(this.getCreatedAt())
+                .createdAt(this.createdAt)
                 .build();
     }
 

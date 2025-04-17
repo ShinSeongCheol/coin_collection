@@ -29,9 +29,7 @@ public class MarketService {
 	}
 	
 	public Market getMarket() {
-		Optional<Market> optionalMarket = marketRepository.findByMarket("market");
-
-		return optionalMarket.get();
+		return marketRepository.findByMarket("market").orElseThrow();
 	}
 
 	public List<MarketDto> updateUpbitMarket() {

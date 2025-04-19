@@ -4,54 +4,21 @@ import java.math.BigDecimal;
 
 import org.hibernate.annotations.Comment;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DayCandle {
+@DiscriminatorValue(value = "day_candle")
+public class DayCandle extends Candle {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-
-	@ManyToOne
-	@JoinColumn(name = "market_id")
-	@Comment("종목 코드")
-	private Market market;
-	@Column
-	@Comment("캔들 기준 시각(UTC 기준)")
-	private String candleDateTimeUtc;
-	@Column
-	@Comment("캔들 기준 시각(KST 기준)")
-	private String candleDateTimeKst;
-	
-	@Comment("시가")
-	private BigDecimal openingPrice;
-	@Comment("고가")
-	private BigDecimal highPrice;
-	@Comment("저가")
-	private BigDecimal lowPrice;
-	@Comment("종가")
-	private BigDecimal tradePrice;
-	@Comment("마지막 틱이 저장된 시각")
-	private Long timestamp;
-	@Comment("누적 거래 금액")
-	private BigDecimal candleAccTradePrice;
-	@Comment("누적 거래량")
-	private BigDecimal candleAccTradeVolume;
 	@Comment("전일 종가(UTC 0시 기준)")
 	private BigDecimal prevClosingPrice;
 	@Comment("전일 종가 대비 변화 금액")

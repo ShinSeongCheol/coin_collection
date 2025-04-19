@@ -12,39 +12,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@Builder
 @ToString
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DayCandleDto {
-
+public class DayCandleDto extends CandleDto {
 	
-	private Integer id;
-	
-	@JsonProperty("market")
-	private String market;
-	@JsonProperty("candle_date_time_utc")
-	private String candleDateTimeUtc;
-	@JsonProperty("candle_date_time_kst")
-	private String candleDateTimeKst;
-	
-	@JsonProperty("opening_price")
-	private BigDecimal openingPrice;
-	@JsonProperty("high_price")
-	private BigDecimal highPrice;
-	@JsonProperty("low_price")
-	private BigDecimal lowPrice;
-	@JsonProperty("trade_price")
-	private BigDecimal tradePrice;
-	@JsonProperty("timestamp")
-	private Long timestamp;
-	@JsonProperty("candle_acc_trade_price")
-	private BigDecimal candleAccTradePrice;
-	@JsonProperty("candle_acc_trade_volume")
-	private BigDecimal candleAccTradeVolume;
 	@JsonProperty("prev_closing_price")
 	private BigDecimal prevClosingPrice;
 	@JsonProperty("change_price")
